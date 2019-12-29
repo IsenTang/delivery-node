@@ -1,5 +1,5 @@
-const users = require('./users');
+const users = require('./users/index');
 
-module.exports = (router) => {
-  users(router);
+module.exports = async (router) => {
+  await users(router);
 };

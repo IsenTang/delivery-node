@@ -32,12 +32,7 @@ connection.initConnection();
 app.use(bodyparser())
   .use(json())
   .use(logger())
-  .use(require('koa-static')(`${__dirname}/public`))
-  .use(views(path.join(__dirname, '/views'), {
-    options: { settings: { views: path.join(__dirname, 'views') } },
-    map: { njk: 'nunjucks' },
-    extension: 'njk',
-  }))
+  // .use(require('koa-static')(`${__dirname}/public`))
   .use(router.routes())
   .use(router.allowedMethods());
 
@@ -56,7 +51,7 @@ routes(router);
 
 app.on('error', (err, ctx) => {
   console.log(err);
-  logger.error('server error', err, ctx);
+  // logger.error('server error', err, ctx);
 });
 
 module.exports = app.listen(config.port, () => {

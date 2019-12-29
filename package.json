@@ -7,8 +7,10 @@
     "dev": "DEBUG='*' nodemon app.js"
   },
   "dependencies": {
+    "@hapi/joi": "^16.1.8",
     "bcrypt": "^3.0.7",
     "debug": "^2.6.9",
+    "error": "^10.0.1",
     "jsonwebtoken": "^8.5.1",
     "koa": "^2.3.0",
     "koa-bodyparser": "^4.2.0",
