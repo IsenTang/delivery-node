@@ -1,20 +1,22 @@
 const _ = require('lodash');
-const Shit = require('../../utils/error');
+const Woops = require('../../common/error');
 
 /* 处理router */
 async function routerHandler({
   schema, handler,
 }, ctx) {
   if (!_.isEmpty(schema)) {
+    /* 先做schema检查 */
     const result = schema.validate(ctx.request.body);
 
     if (result.error) {
-      ctx.throw('request-body-invalid', 'request-body-invalid', { details: result.error.details });
+      throw new Woops('request-body-invalid', 'request-body-invalid', result.error.details);
     }
   }
 
   await handler(ctx);
 }
+
 
 /* 封装router，加入joi做schema检查 */
 async function endpoint(data, router) {

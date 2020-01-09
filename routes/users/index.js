@@ -1,11 +1,11 @@
-const debug = require('debug')('users');
+// const debug = require('debug')('users');
 const { endpoint } = require('../common/handler');
 
 module.exports = async (router) => {
   /**
    * 登录
    */
-
+  await endpoint(require('./login'), router);
 
   /**
    * 注册

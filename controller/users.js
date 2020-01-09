@@ -1,9 +1,24 @@
-const { encrypte, sign } = require('../services/login');
+const _ = require('lodash');
+const { encrypte, sign, compare } = require('../services/login');
 const { create, findOne } = require('../db/users');
+const Woops = require('../common/error');
 
+/*
+ * 登录
+ */
 async function login({ password, username }) {
+  const result = await findOne({ username });
 
+  if (_.isEmpty(result)) {
+    throw new Woops('No user', 'No user');
+  }
 
+  const isMatch = await compare(password, result.password);
+
+  if (isMatch) {
+    return result;
+  }
+  throw new Woops('Password uncorrected', 'Password uncorrected');
 }
 
 /**

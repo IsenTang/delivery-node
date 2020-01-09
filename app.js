@@ -4,13 +4,12 @@ const Router = require('koa-router');
 const app = new Koa();
 const router = new Router();
 
-const views = require('koa-views');
 const json = require('koa-json');
-const onerror = require('koa-onerror');
+// const onerror = require('koa-onerror');
 const bodyparser = require('koa-bodyparser');
 const logger = require('koa-logger');
 const debug = require('debug')('koa2:server');
-const path = require('path');
+const Wroops = require('./common/error');
 
 const config = require('./config');
 const routes = require('./routes');
@@ -21,7 +20,20 @@ const connection = require('./utils/connection');
 require('./utils/supportColors');
 
 // error handler
-onerror(app);
+app.use(async (ctx, next) => {
+  try {
+    await next();
+  } catch (error) {
+    if (error instanceof Wroops) {
+      ctx.status = 500;
+      ctx.body = {
+        code: error.status,
+        message: error.message,
+        details: error.details,
+      };
+    }
+  }
+});
 
 /*
  * mongodb
@@ -51,8 +63,8 @@ routes(router);
 
 app.on('error', (err, ctx) => {
   console.log(err);
-  // logger.error('server error', err, ctx);
 });
+
 
 module.exports = app.listen(config.port, () => {
   debug(`Listening on http://localhost:${port}`);

@@ -1,6 +1,6 @@
-const _ = require('lodash');
 const joi = require('@hapi/joi');
 const controller = require('../../controller/users');
+const Woops = require('../../common/error');
 
 /* schema */
 const schema = joi.object().keys({
@@ -17,17 +17,11 @@ async function handler(ctx) {
 
   /* 用户已经存在 */
   if (isDuplicate) {
-    throw new Error('user duplicate');
+    throw new Woops('user duplicate', 'user duplicate');
   }
 
   /* 注册用户 */
   const user = await controller.register({ username, password }).toObject();
-
-  /* 生成token */
-  const token = await controller.createToken(user);
-
-  /* add token */
-  _.set(user, 'token', token);
 
   ctx.response.body = user;
 }
