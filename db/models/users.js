@@ -5,13 +5,13 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const usersSchema = new Schema({
-  username: String,
-  password: String,
-  nickname: String,
-  createdAt: Date,
-  updatedAt: { type: Date, default: Date.now() },
+   username: String,
+   password: String,
+   nickname: String,
+   createdAt: Date,
+   updatedAt: { type: Date, default: Date.now() },
 });
 
-const usersModel = mongoose.model('Users', usersSchema);
+const UsersModel = mongoose.model('Users', usersSchema);
 
-module.exports = usersModel;
+module.exports = UsersModel;

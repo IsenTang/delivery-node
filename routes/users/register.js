@@ -2,34 +2,39 @@ const joi = require('@hapi/joi');
 const controller = require('../../controller/users');
 const Woops = require('../../common/error');
 
+const { bsDecode } = require('../../services/login');
+
 /* schema */
 const schema = joi.object().keys({
-  username: joi.string().alphanum().min(3).max(30)
-    .required(),
-  password: joi.string().regex(/^[a-zA-Z0-9]{3,30}$/).required(),
+   username: joi.string().alphanum()
+      .required(),
+   password: joi.string().alphanum().required(),
 });
-
 
 /* handler */
 async function handler(ctx) {
-  const { username, password } = ctx.request.body;
-  const isDuplicate = await controller.checkDuplicate({ username });
+   let { username, password } = ctx.request.body;
 
-  /* 用户已经存在 */
-  if (isDuplicate) {
-    throw new Woops('user duplicate', 'user duplicate');
-  }
+   /* 解码 */
+   username = await bsDecode(username);
+   password = await bsDecode(password);
 
-  /* 注册用户 */
-  const user = await controller.register({ username, password }).toObject();
+   const isDuplicate = await controller.checkDuplicate({ username });
 
-  ctx.response.body = user;
+   /* 用户已经存在 */
+   if (isDuplicate) {
+      throw new Woops('user duplicate', 'user duplicate');
+   }
+
+   /* 注册用户 */
+   const user = await (await controller.register({ username, password })).toObject();
+
+   ctx.response.body = user;
 }
 
-
 module.exports = {
-  method: 'post',
-  url: '/register',
-  schema,
-  handler,
+   method: 'post',
+   url: '/register',
+   schema,
+   handler,
 };

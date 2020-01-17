@@ -22,18 +22,18 @@ require('./utils/supportColors');
 
 // error handler
 app.use(async (ctx, next) => {
-  try {
-    await next();
-  } catch (error) {
-    if (error instanceof Wroops) {
-      ctx.status = 500;
-      ctx.body = {
-        code: error.status,
-        message: error.message,
-        details: error.details,
-      };
-    }
-  }
+   try {
+      await next();
+   } catch (error) {
+      if (error instanceof Wroops) {
+         ctx.status = 500;
+         ctx.body = {
+            code: error.status,
+            message: error.message,
+            details: error.details,
+         };
+      }
+   }
 });
 
 /*
@@ -43,21 +43,20 @@ connection.initConnection();
 
 // middlewares
 app.use(bodyparser())
-  .use(json())
-  .use(logger())
-  .use(cors())
-  // .use(require('koa-static')(`${__dirname}/public`))
-  .use(router.routes())
-  .use(router.allowedMethods());
+   .use(json())
+   .use(logger())
+   .use(cors())
+// .use(require('koa-static')(`${__dirname}/public`))
+   .use(router.routes())
+   .use(router.allowedMethods());
 
 // logger
 app.use(async (ctx, next) => {
-  const start = new Date();
-  await next();
-  const ms = new Date() - start;
-  console.log(`${ctx.method} ${ctx.url} - ${ms}`);
+   const start = new Date();
+   await next();
+   const ms = new Date() - start;
+   console.log(`${ctx.method} ${ctx.url} - ${ms}`);
 });
-
 
 /*
  * Routers
@@ -65,10 +64,9 @@ app.use(async (ctx, next) => {
 routes(router);
 
 app.on('error', (err, ctx) => {
-  console.log(err);
+   console.log(err);
 });
 
-
 module.exports = app.listen(config.port, () => {
-  debug(`Listening on http://localhost:${port}`);
+   debug(`Listening on http://localhost:${port}`);
 });

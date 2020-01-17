@@ -1,55 +1,53 @@
-const usersModel = require('./models/users');
-
+const UsersModel = require('./models/users');
 
 /**
  * create
  */
 async function create(data) {
-  const user = new usersModel(data);
+   const user = new UsersModel(data);
 
-  const result = await user.save();
+   const result = await user.save();
 
-  return result;
+   return result;
 }
 /**
  * find one
  */
 async function findOne(query) {
-  const result = await usersModel.findOne(query);
+   const result = await UsersModel.findOne(query);
 
-  return result;
+   return result;
 }
 
 /**
  * find
  */
 async function find({ query }) {
-  const result = await usersModel.find(query).exec();
+   const result = await UsersModel.find(query).exec();
 
-  return result;
+   return result;
 }
 
 /**
  * update
  */
 async function update({ query, updated }) {
-  const result = await usersModel.update(query, updated, { upsert: true });
+   const result = await UsersModel.update(query, updated, { upsert: true });
 
-  return result;
+   return result;
 }
 
 /*
  * delete
  */
 async function deleteOne({ query }) {
-  await usersModel.deleteOne(query);
+   await UsersModel.deleteOne(query);
 }
 
-
 module.exports = {
-  create,
-  findOne,
-  find,
-  update,
-  deleteOne,
+   create,
+   findOne,
+   find,
+   update,
+   deleteOne,
 };
