@@ -8,6 +8,7 @@ const json = require('koa-json');
 // const onerror = require('koa-onerror');
 const bodyparser = require('koa-bodyparser');
 const logger = require('koa-logger');
+const cors = require('koa2-cors');
 const debug = require('debug')('koa2:server');
 const Wroops = require('./common/error');
 
@@ -44,6 +45,7 @@ connection.initConnection();
 app.use(bodyparser())
   .use(json())
   .use(logger())
+  .use(cors())
   // .use(require('koa-static')(`${__dirname}/public`))
   .use(router.routes())
   .use(router.allowedMethods());
@@ -55,6 +57,7 @@ app.use(async (ctx, next) => {
   const ms = new Date() - start;
   console.log(`${ctx.method} ${ctx.url} - ${ms}`);
 });
+
 
 /*
  * Routers

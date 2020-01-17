@@ -14,7 +14,7 @@ async function initConnection() {
       debug(error);
     }
 
-    debug('connection success');
+    debug('mongodb connection success');
   });
 }
 
