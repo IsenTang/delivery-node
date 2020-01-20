@@ -3,14 +3,12 @@ const RestaurantModel = require('./models/restaurant');
 /**
  * find
  */
-async function findNearBy(data) {
-   const query = RestaurantModel.find();
-
-   const result = await query.where('location').nearSphere(data).limit(30).exec();
+async function find({ query }) {
+   const result = await RestaurantModel.find(query).exec();
 
    return result;
 }
 
 module.exports = {
-   findNearBy,
+   find,
 };

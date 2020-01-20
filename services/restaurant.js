@@ -17,8 +17,13 @@ async function near(location) {
 
    /* near config  */
    return {
-      center: data,
-      maxDistance: Number(50000),
+      $nearSphere: {
+         $geometry: {
+            type: 'Point',
+            coordinates: data,
+         },
+         $maxDistance: 50000,
+      },
    };
 }
 

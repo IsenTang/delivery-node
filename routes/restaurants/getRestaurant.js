@@ -7,7 +7,7 @@ const schema = joi.object().keys({});
 
 /* handler */
 async function handler(ctx) {
-   const { location } = ctx.query;
+   const { location } = ctx.params;
 
    const result = await controller.getNearByRestaurant({ location });
 
@@ -16,7 +16,7 @@ async function handler(ctx) {
 
 module.exports = {
    method: 'get',
-   url: '/restaurant',
+   url: '/restaurant/location/:location',
    schema,
    handler,
 };
