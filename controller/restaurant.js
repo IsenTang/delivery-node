@@ -1,15 +1,16 @@
 const { find } = require('../db/restaurants');
-const { near } = require('../services/restaurant');
+const { intersects } = require('../services/restaurant');
 
 /* 获取周边饭店 */
 async function getNearByRestaurant({ location }) {
-   const nearByLocation = await near(location);
+   const intersectsLocation = await intersects(location);
 
    const query = {
-      location: nearByLocation,
+      'delivery.zone.features.geometry': intersectsLocation,
+      hours: { $exists: true },
    };
 
-   const result = await (await find({ query }));
+   const result = (await find({ query }));
 
    return result;
 }
