@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const restaurantSchema = new Schema({
-
+   _id: Schema.Types.Mixed,
 });
 
 const RestaurantModel = mongoose.model('restaurants', restaurantSchema);

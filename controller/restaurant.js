@@ -8,9 +8,10 @@ async function getNearByRestaurant({ location }) {
    const query = {
       'delivery.zone.features.geometry': intersectsLocation,
       hours: { $exists: true },
+      items: { $exists: true },
    };
 
-   const result = (await find({ query }));
+   const result = await find({ query });
 
    return result;
 }
