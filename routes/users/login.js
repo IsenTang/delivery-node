@@ -18,7 +18,7 @@ async function handler(ctx) {
    password = await bsDecode(password);
 
    /* 注册用户 */
-   const user = await (await controller.login({ username, password })).toObject();
+   const user = await controller.login({ username, password }).toObject();
 
    /* 生成token */
    const token = await controller.createToken(user);
