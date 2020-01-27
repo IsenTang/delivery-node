@@ -42,7 +42,7 @@ async function getMenu({ restaurantId }) {
       [ 'desc', 'desc', 'acs' ],
    );
 
-   return { categories, food: sortedFood };
+   return { categories, foods: sortedFood };
 }
 
 module.exports = {
