@@ -18,4 +18,5 @@ module.exports = {
    url: '/restaurant/location/:location',
    schema,
    handler,
+   isPublic: true,
 };

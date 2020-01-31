@@ -16,7 +16,7 @@ const saltRounds = 10;
 function sign(data) {
    return jwt.sign({
       data,
-   }, secret, { expiresIn: 60 * 60 * 24 });
+   }, secret, { expiresIn: 60 * 60 * 24 * 3 });
 }
 
 /*

@@ -37,4 +37,5 @@ module.exports = {
    url: '/register',
    schema,
    handler,
+   isPublic: true,
 };

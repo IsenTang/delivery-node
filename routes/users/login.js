@@ -34,4 +34,5 @@ module.exports = {
    url: '/login',
    schema,
    handler,
+   isPublic: true,
 };

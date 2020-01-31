@@ -13,6 +13,8 @@ const orderSchema = new Schema({
    restaurant: {
       _id: Schema.Types.Mixed,
    },
+   createdAt: { type: Date, default: Date.now() },
+   updatedAt: { type: Date, default: Date.now() },
 });
 
 const OrderModel = mongoose.model('orders', orderSchema);

@@ -1,4 +1,5 @@
 const _ = require('lodash');
+const auth = require('../../middlewares/auth');
 const Woops = require('../../common/error');
 
 /* 处理router */
@@ -23,21 +24,33 @@ async function endpoint(data, router) {
       method, url,
    } = data;
 
+   /* 如果public为true，不需要登录验证就可以访问 */
+   const { isPublic } = data;
+
    switch (method) {
    case 'get':
-      return router.get(url, async (ctx, next) => {
+      /* 注入中间件，在请求开始时，验证用户登录态。 */
+      return router.get(url, isPublic ? async (ctx, next) => {
+         await next();
+      } : auth, async (ctx, next) => {
          await routerHandler(data, ctx);
       });
    case 'post':
-      return router.post(url, async (ctx, next) => {
+      return router.post(url, isPublic ? async (ctx, next) => {
+         await next();
+      } : auth, async (ctx, next) => {
          await routerHandler(data, ctx);
       });
    case 'put':
-      return router.put(url, async (ctx, next) => {
+      return router.put(url, isPublic ? async (ctx, next) => {
+         await next();
+      } : auth, async (ctx, next) => {
          await routerHandler(data, ctx);
       });
    case 'delete':
-      return router.delete(url, async (ctx, next) => {
+      return router.delete(url, isPublic ? async (ctx, next) => {
+         await next();
+      } : auth, async (ctx, next) => {
          await routerHandler(data, ctx);
       });
    default:
