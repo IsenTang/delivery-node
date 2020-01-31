@@ -1,9 +1,11 @@
-const users = require('./users/index');
-const restaurants = require('./restaurants/index');
-const menus = require('./menus/index');
+const users = require('./users');
+const restaurants = require('./restaurants');
+const menus = require('./menus');
+const order = require('./order');
 
 module.exports = async (router) => {
    await users(router);
    await restaurants(router);
    await menus(router);
+   await order(router);
 };

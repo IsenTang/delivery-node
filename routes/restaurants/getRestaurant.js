@@ -1,5 +1,4 @@
 const joi = require('@hapi/joi');
-const _ = require('lodash');
 const controller = require('../../controller/restaurant');
 
 /* schema */
