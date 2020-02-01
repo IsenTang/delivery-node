@@ -19,4 +19,5 @@ module.exports = {
    url: '/menu/restaurantId/:restaurantId',
    schema,
    handler,
+   isPublic: true,
 };
