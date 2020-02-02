@@ -1,13 +1,12 @@
 const joi = require('@hapi/joi');
 const controller = require('../../controller/orders');
-// const {  } = require('../../services/orders');
 
 /* schema */
 const schema = joi.object().keys({
    payment: joi.string().alphanum().required(),
    cart: joi.array().required(),
-   user: joi.object().required(),
-   restaurant: joi.object().required(),
+   userId: joi.string().required(),
+   restaurantId: joi.string().required(),
 });
 
 /* handler */

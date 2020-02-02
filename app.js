@@ -28,6 +28,9 @@ require('./utils/supportColors');
  */
 connection.initConnection();
 
+// error handler
+app.use(errorMiddleware);
+
 // middlewares
 app.use(bodyparser())
    .use(json())
@@ -37,9 +40,6 @@ app.use(bodyparser())
    }))
    .use(router.routes())
    .use(router.allowedMethods());
-
-// error handler
-app.use(errorMiddleware);
 
 // logger
 app.use(async (ctx, next) => {
@@ -54,9 +54,9 @@ app.use(async (ctx, next) => {
  */
 routes(router);
 
-app.on('error', (err, ctx) => {
-   console.log(err);
-});
+// app.on('error', (err, ctx) => {
+//    // console.error(err);
+// });
 
 module.exports = app.listen(config.port, () => {
    debug(`Listening on http://localhost:${port}`);

@@ -1,10 +1,11 @@
-const Wroops = require('../common/error');
+const Woops = require('../common/error');
 
+/* 错误处理 */
 async function errorHandler(ctx, next) {
    try {
       await next();
    } catch (error) {
-      if (error instanceof Wroops) {
+      if (error instanceof Woops) {
          ctx.status = 500;
          ctx.body = {
             code: error.status,

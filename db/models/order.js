@@ -7,12 +7,8 @@ const { Schema } = mongoose;
 const orderSchema = new Schema({
    payment: String,
    cart: Array,
-   user: {
-      _id: Schema.Types.ObjectId,
-   },
-   restaurant: {
-      _id: Schema.Types.Mixed,
-   },
+   user: Object,
+   restaurant: Object,
    createdAt: { type: Date, default: Date.now() },
    updatedAt: { type: Date, default: Date.now() },
 });

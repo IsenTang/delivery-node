@@ -32,25 +32,25 @@ async function endpoint(data, router) {
       /* 注入中间件，在请求开始时，验证用户登录态。 */
       return router.get(url, isPublic ? async (ctx, next) => {
          await next();
-      } : auth, async (ctx, next) => {
+      } : auth, async (ctx) => {
          await routerHandler(data, ctx);
       });
    case 'post':
       return router.post(url, isPublic ? async (ctx, next) => {
          await next();
-      } : auth, async (ctx, next) => {
+      } : auth, async (ctx) => {
          await routerHandler(data, ctx);
       });
    case 'put':
       return router.put(url, isPublic ? async (ctx, next) => {
          await next();
-      } : auth, async (ctx, next) => {
+      } : auth, async (ctx) => {
          await routerHandler(data, ctx);
       });
    case 'delete':
       return router.delete(url, isPublic ? async (ctx, next) => {
          await next();
-      } : auth, async (ctx, next) => {
+      } : auth, async (ctx) => {
          await routerHandler(data, ctx);
       });
    default:
