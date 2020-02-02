@@ -12,7 +12,7 @@ async function find({ query }) {
 /**
  * findOne
  */
-async function findOne({ query }) {
+async function findOne(query) {
    const result = await RestaurantModel.findOne(query).exec();
 
    return result;
