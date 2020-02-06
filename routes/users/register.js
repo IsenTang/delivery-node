@@ -34,7 +34,7 @@ async function handler(ctx) {
 
 module.exports = {
    method: 'post',
-   url: '/register',
+   url: '/user/register',
    schema,
    handler,
    isPublic: true,
