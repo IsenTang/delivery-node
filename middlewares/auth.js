@@ -14,26 +14,23 @@ async function auth(ctx, next) {
    }
 
    /* 解码token */
-   const decoded = decode(authorization);
+   try {
+      const decoded = decode(authorization);
 
-   const id = _.get(decoded, 'data._id');
+      const id = _.get(decoded, 'data._id');
 
-   /* 查找用户信息 */
-   const user = await findOne({ _id: canon(id) });
+      /* 查找用户信息 */
+      const user = await findOne({ _id: canon(id) });
 
-   /* 用户不存在 */
-   if (!user) {
+      /* 用户不存在 */
+      if (!user) {
+         throw new Woops('auth-failed', 'You need login first.');
+      }
+   } catch (error) {
       throw new Woops('auth-failed', 'You need login first.');
+   } finally {
+      await next();
    }
-
-   /* token是否过期 */
-   const exp = _.get(decoded, 'exp');
-
-   if (exp > new Date().getTime()) {
-      throw new Woops('auth-failed', 'You need login first.');
-   }
-
-   await next();
 }
 
 module.exports = auth;
