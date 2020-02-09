@@ -11,7 +11,7 @@ const saltRounds = 10;
 
 /*
  *  token
- * 1 day expires
+ * 3 day expires
  */
 function sign(data) {
    return jwt.sign({

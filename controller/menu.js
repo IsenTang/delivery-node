@@ -27,7 +27,7 @@ async function getMenu({ restaurantId }) {
    for (const f of food) {
       /* Availability */
       // eslint-disable-next-line no-await-in-loop
-      const isAvailable = await isOpen({ ent: f, tz: rest.timezone });
+      const isAvailable = isOpen({ ent: f, tz: rest.timezone });
 
       /* Assign availability to food object */
       if (f.hours && !isAvailable) {
@@ -39,7 +39,7 @@ async function getMenu({ restaurantId }) {
    const sortedFood = _.orderBy(
       food,
       [ 'available', 'zscore', 'index' ],
-      [ 'desc', 'desc', 'acs' ],
+      [ 'desc', 'desc', 'asc' ],
    );
 
    return { categories, foods: sortedFood };

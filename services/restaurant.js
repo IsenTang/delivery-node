@@ -12,7 +12,7 @@ async function intersects(location) {
    if (_.isString(location)) {
       data = _.map(location.split(','), Number);
    } else {
-      throw new Woops('Location is malformed', 'Location is malformed');
+      throw new Woops('Location-is-malformed', 'Location is malformed');
    }
 
    /* near config  */
