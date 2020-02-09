@@ -19,7 +19,7 @@ async function placeOrder({ data }) {
    });
 
    if (_.isEmpty(restaurant || _.isEmpty(user))) {
-      throw new Woops('Something wrong with place order.', 'Something wrong with place order.');
+      throw new Woops('Wrong-with-place-order', 'Something wrong with place order.');
    }
 
    const order = {
