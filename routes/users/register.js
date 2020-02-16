@@ -23,7 +23,7 @@ async function handler(ctx) {
 
    /* 用户已经存在 */
    if (isDuplicate) {
-      throw new Woops('user duplicate', 'user duplicate');
+      throw new Woops('user-duplicate', 'user duplicate');
    }
 
    /* 注册用户 */
