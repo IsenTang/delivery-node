@@ -6,9 +6,7 @@ const schema = joi.object().keys({});
 
 /* handler */
 async function handler(ctx) {
-   const { location } = ctx.params;
-
-   const result = await controller.getNearByRestaurant({ location });
+   const result = await controller.getNearByRestaurant(ctx.params);
 
    ctx.response.body = result;
 }

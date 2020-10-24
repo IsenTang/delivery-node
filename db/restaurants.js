@@ -18,7 +18,15 @@ async function findOne(query) {
    return result;
 }
 
+/*  */
+async function findByPage({ query, limit, skip }) {
+   const result = await RestaurantModel.find(query).skip(skip).limit(limit).exec();
+
+   return result;
+}
+
 module.exports = {
    find,
    findOne,
+   findByPage,
 };
