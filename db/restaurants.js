@@ -1,10 +1,11 @@
+const _ = require('lodash');
 const RestaurantModel = require('./models/restaurant');
 
 /**
  * find
  */
 async function find({ query }) {
-   const result = await RestaurantModel.find(query).exec();
+   const result = await RestaurantModel.find(query).lean();
 
    return result;
 }
@@ -18,9 +19,18 @@ async function findOne(query) {
    return result;
 }
 
-/*  */
+/* 分页 */
 async function findByPage({ query, limit, skip }) {
    const result = await RestaurantModel.find(query).skip(skip).limit(limit).exec();
+
+   return result;
+}
+
+/**
+ * update
+ */
+async function update({ query, updated }) {
+   const result = await RestaurantModel.updateOne(query, updated, { upsert: true });
 
    return result;
 }
@@ -29,4 +39,5 @@ module.exports = {
    find,
    findOne,
    findByPage,
+   update,
 };

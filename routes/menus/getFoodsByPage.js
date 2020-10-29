@@ -1,20 +1,23 @@
 const joi = require('@hapi/joi');
 const _ = require('lodash');
-const controller = require('../../controller/restaurant');
+const controller = require('../../controller/menu');
 
 /* schema */
 const schema = joi.object().keys({});
 
 /* handler */
 async function handler(ctx) {
-   const result = await controller.getNearByRestaurant(ctx.params);
+   const { foods, count } = await controller.getFoodsByPage(ctx.request.query);
 
-   ctx.response.body = result;
+   ctx.response.body = {
+      list: foods,
+      count,
+   };
 }
 
 module.exports = {
    method: 'get',
-   url: '/restaurant/location/:location',
+   url: '/food',
    schema,
    handler,
    isPublic: true,

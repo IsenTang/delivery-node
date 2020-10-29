@@ -1,8 +1,10 @@
-const { find, findByPage } = require('../db/restaurants');
+const Woops = require('../common/error');
+const { find, update } = require('../db/restaurants');
 const { intersects } = require('../services/restaurant');
+const { canon } = require('../utils/utils');
 
-/* 获取周边饭店 */
-async function getNearByRestaurant({ location, limit, skip }) {
+/* 获取所有周边饭店 */
+async function getNearByRestaurant({ location }) {
    const intersectsLocation = await intersects(location);
 
    const query = {
@@ -10,16 +12,29 @@ async function getNearByRestaurant({ location, limit, skip }) {
       hours: { $exists: true },
       items: { $exists: true },
    };
-   let result;
-   if (limit && skip) {
-      result = await findByPage({ query, limit, skip });
-   } else {
-      result = await find({ query });
-   }
+
+   const result = await find({ query });
 
    return result;
 }
 
+/* 获取周边饭店 */
+async function updateRestaurant({ id, data }) {
+   try {
+      const result = await update({
+         query: {
+            _id: canon(id),
+         },
+         updated: { ...data },
+      });
+
+      return result;
+   } catch (error) {
+      throw new Woops('Wrong-with-update', 'Something wrong with update restaurant.');
+   }
+}
+
 module.exports = {
    getNearByRestaurant,
+   updateRestaurant,
 };
