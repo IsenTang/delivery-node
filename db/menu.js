@@ -22,7 +22,7 @@ async function findByPage({ query, limit, skip }) {
  * count
  */
 async function count({ query }) {
-   const result = await MenuModel.find(query).count();
+   const result = await MenuModel.find(query).countDocuments();
 
    return result;
 }

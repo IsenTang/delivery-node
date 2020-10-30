@@ -115,7 +115,7 @@ async function updateFood({ id, data }) {
          query: {
             _id: canon(id),
          },
-         updated: { ...data },
+         updated: _.omit(data, 'id'),
       });
    } catch (error) {
       console.log(error);
