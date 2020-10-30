@@ -1,6 +1,7 @@
 const debug = require('debug')('mongoose');
 const mongoose = require('mongoose');
 
+mongoose.set('useFindAndModify', false);
 /*
  * mongodb connection
  */

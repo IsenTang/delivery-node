@@ -31,7 +31,13 @@ async function count({ query }) {
  * update one
  */
 async function updateOne({ query, updated }) {
-   const result = await MenuModel.updateOne(query, updated, { upsert: true });
+   const { _id: id } = query;
+
+   const result = await MenuModel.findByIdAndUpdate(
+      id,
+      { $set: { ...updated } },
+      { upsert: true, new: true },
+   );
 
    return result;
 }
