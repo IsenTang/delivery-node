@@ -18,7 +18,6 @@ const errorMiddleware = require('./middlewares/error');
 const config = require('./config');
 const routes = require('./routes');
 
-console.log('new branch');
 const port = process.env.PORT || config.port;
 
 const connection = require('./utils/connection');
