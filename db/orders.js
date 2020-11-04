@@ -4,7 +4,7 @@ const OrderModel = require('./models/order');
 async function create(data) {
    const order = new OrderModel(data);
 
-   const result = await (await order.save()).toObject();
+   const result = await order.save();
 
    return result;
 }

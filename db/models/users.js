@@ -9,7 +9,7 @@ const usersSchema = new Schema({
    password: String,
    nickname: String,
    createdAt: Date,
-   updatedAt: { type: Date, default: Date.now() },
+   updatedAt: { type: Date, default: Date.now },
 });
 
 const UsersModel = mongoose.model('Users', usersSchema);

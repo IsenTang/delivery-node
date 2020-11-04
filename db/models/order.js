@@ -9,8 +9,8 @@ const orderSchema = new Schema({
    cart: Array,
    user: Object,
    restaurant: Object,
-   createdAt: { type: Date, default: Date.now() },
-   updatedAt: { type: Date, default: Date.now() },
+   createdAt: { type: Date, default: Date.now },
+   updatedAt: { type: Date, default: Date.now },
 });
 
 const OrderModel = mongoose.model('orders', orderSchema);
