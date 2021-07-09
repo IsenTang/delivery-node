@@ -1,4 +1,5 @@
 const _ = require('lodash');
+const moment = require('moment');
 const { create, find } = require('../db/orders');
 const { findOne: findRestaurant } = require('../db/restaurants');
 const { findOne: findUser } = require('../db/users');
@@ -45,7 +46,26 @@ async function getOrder({ userId }) {
    return result;
 }
 
+async function getOrderByQuery(data) {
+   const { start, end } = data;
+
+   const query = {
+
+   };
+   if (start && end) {
+      query.createdAt = {
+         $gt: moment(start).toDate(),
+         $lt: moment(end).toDate(),
+      };
+   }
+
+   const result = await find({ query });
+
+   return result;
+}
+
 module.exports = {
    placeOrder,
    getOrder,
+   getOrderByQuery,
 };

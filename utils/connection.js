@@ -6,7 +6,9 @@ mongoose.set('useFindAndModify', false);
  * mongodb connection
  */
 async function initConnection() {
-   await mongoose.connect('mongodb://localhost/delivery', {
+   await mongoose.connect('mongodb://banyuan:banyuan123@49.235.98.65/delivery', {
+
+      // await mongoose.connect('mongodb://localhost/delivery', {
       useNewUrlParser: true,
       useUnifiedTopology: true,
    }, (error) => {
