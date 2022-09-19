@@ -27,6 +27,7 @@ async function auth(ctx, next) {
          throw new Woops('auth-failed', 'You need login first.');
       }
    } catch (error) {
+      // * 代表token失效
       throw new Woops('auth-failed', 'You need login first.');
    } finally {
       await next();

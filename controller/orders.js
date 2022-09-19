@@ -1,5 +1,7 @@
 const _ = require('lodash');
-const { create, find } = require('../db/orders');
+const {
+   create, find, findByPage, count,
+} = require('../db/orders');
 const { findOne: findRestaurant } = require('../db/restaurants');
 const { findOne: findUser } = require('../db/users');
 const Woops = require('../common/error');
@@ -45,7 +47,30 @@ async function getOrder({ userId }) {
    return result;
 }
 
+async function getOrderByPage({ userId, page, limit }) {
+   const query = {
+      'user._id': canon(userId),
+   };
+
+   const [
+      list,
+      total,
+   ] = await Promise.all([
+      findByPage(
+         {
+            query,
+            skip: (page - 1) * limit,
+            limit: Number(limit),
+         },
+      ),
+      count({ query }),
+   ]);
+
+   return { list, total };
+}
+
 module.exports = {
    placeOrder,
    getOrder,
+   getOrderByPage,
 };

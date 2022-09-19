@@ -1,4 +1,3 @@
-const _ = require('lodash');
 const RestaurantModel = require('./models/restaurant');
 
 /**
@@ -13,7 +12,7 @@ async function find({ query }) {
 /**
  * findOne
  */
-async function findOne(query) {
+async function findOne({ query }) {
    const result = await RestaurantModel.findOne(query).exec();
 
    return result;
@@ -35,9 +34,19 @@ async function update({ query, updated }) {
    return result;
 }
 
+/**
+ * count
+ */
+async function count({ query }) {
+   const result = await RestaurantModel.find(query).countDocuments();
+
+   return result;
+}
+
 module.exports = {
    find,
    findOne,
    findByPage,
    update,
+   count,
 };

@@ -10,4 +10,9 @@ module.exports = async (router) => {
     * 获取用户订单信息
     */
    await endpoint(require('./getOrder'), router);
+
+   /*
+    * 分页获取用户订单
+    */
+   await endpoint(require('./getOrdersByPage'), router);
 };

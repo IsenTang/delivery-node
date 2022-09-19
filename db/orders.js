@@ -18,7 +18,28 @@ async function find({ query }) {
    return result;
 }
 
+/**
+ * 分页
+ */
+async function findByPage({ query, limit, skip }) {
+   const result = await OrderModel.find(query).sort({ createdAt: -1 }).skip(skip).limit(limit)
+      .exec();
+
+   return result;
+}
+
+/**
+ * count
+ */
+async function count({ query }) {
+   const result = await OrderModel.find(query).countDocuments();
+
+   return result;
+}
+
 module.exports = {
    create,
    find,
+   findByPage,
+   count,
 };
