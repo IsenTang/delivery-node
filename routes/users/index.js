@@ -11,4 +11,9 @@ module.exports = async (router) => {
    * 注册
    */
    await endpoint(require('./register'), router);
+
+   /**
+   * 微信登陆
+   */
+   await endpoint(require('./wxLogin'), router);
 };

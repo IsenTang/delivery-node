@@ -15,4 +15,9 @@ module.exports = async (router) => {
     * 获取所有订单信息
     */
    await endpoint(require('./getOrderByTime'), router);
+
+   /*
+    * 分页获取用户订单
+    */
+   await endpoint(require('./getOrdersByPage'), router);
 };

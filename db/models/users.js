@@ -9,6 +9,7 @@ const usersSchema = new Schema({
    password: String,
    nickname: String,
    createdAt: Date,
+   openid: String, // * wx用户标识
    updatedAt: { type: Date, default: Date.now },
 });
 
